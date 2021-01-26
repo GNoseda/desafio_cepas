@@ -10,7 +10,7 @@ class Assembly < ApplicationRecord
 
   def strain_percent
     var = (self.portion.to_f/self.total_amount.to_f)*100
-    "#{var.round(1)}%"
+    "(#{var.round(1)}%)"
   end
 
   def total_amount
