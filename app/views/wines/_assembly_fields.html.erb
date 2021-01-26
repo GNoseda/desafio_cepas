@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="field">
+    <%= f.label :strain_id, "Seleccine una cepa" %>
+    <%= f.select :strain_id,  options_for_select(@strains)%>
+  </div>
+
+  <div class="field">
+    <%= f.label :portion, "Participación en ensamblaje" %>
+    <%= f.number_field :portion %>
+  </div>
+  <br>
+</div>

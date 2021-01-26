@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vinos</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Ensamblaje</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wines.each do |wine| %>
+      <tr>
+        <td><%= wine.name %></td>
+        <td>
+          <% wine.assemblies.each do |asmb| %>
+            <%= asmb.strain_name %> 
+            <%= asmb.strain_percent %><br>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', wine %></td>
+        <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
+        <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Registrar Vino', new_wine_path %>

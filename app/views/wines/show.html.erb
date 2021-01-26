@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Nombre:</strong>
+  <%= @wine.name %>
+</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cepa</th>
+      <th>Cantidad</th>
+      <th>Participación</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wine.assemblies.each do |asmb| %>
+      <tr>
+        <td> <%= asmb.strain_name %> </td>
+        <td> <%= asmb.portion %> </td>
+        <td> <%= asmb.strain_percent %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Editar Vino', edit_wine_path(@wine) %> |
+<%= link_to 'Menú de vinos', wines_path %>
