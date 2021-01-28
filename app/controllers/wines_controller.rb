@@ -74,7 +74,7 @@ class WinesController < ApplicationController
     end
 
     def set_strains
-      @strains = Strain.pluck :name, :id
+      @strains = Strain.all
     end
     
     def set_oenologists
