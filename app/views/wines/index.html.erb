@@ -7,7 +7,14 @@
     <tr>
       <th>Nombre</th>
       <th>Ensamblaje</th>
-      <th colspan="3"></th>
+      <th>Calificación promedio</th>
+      <th>Calificaciones</th>
+      <% if current_user.can_edit  %>
+        <th colspan="3"></th>
+      <% else %>  
+        <th colspan="1"></th>
+      <% end %>
+      
     </tr>
   </thead>
 
@@ -21,9 +28,19 @@
             <%= asmb.strain_percent %><br>
           <% end %>
         </td>
-        <td><%= link_to 'Show', wine %></td>
-        <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
-        <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= wine.avarage_grade %></td>
+        <td>
+          <% wine.grades.each do |grd| %>
+            <%= grd.oenologist_name %>: 
+            <%= grd.grade %><br>
+          <% end %>
+        </td>
+
+        <td><%= link_to 'Detalles', wine %></td>
+        <% if current_user.can_edit %>
+          <td><%= link_to 'Editar', edit_wine_path(wine) %></td>
+          <td><%= link_to 'Destruir', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
+        <% end %>      
       </tr>
     <% end %>
   </tbody>

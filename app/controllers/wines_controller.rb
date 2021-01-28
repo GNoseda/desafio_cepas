@@ -1,7 +1,8 @@
 class WinesController < ApplicationController
   before_action :set_wine, only: %i[ show edit update destroy ]
-  before_action :set_strains, only: %i[ new edit create ]
-
+  before_action :set_strains, only: %i[ new create update]
+  before_action :set_oenologists, only: %i[ edit update]
+  before_action :user_can_edit, only: %i[ new edit update destroy ]
   # GET /wines or /wines.json
   def index
     @wines = Wine.all.order(:name)
@@ -18,6 +19,8 @@ class WinesController < ApplicationController
 
   # GET /wines/1/edit
   def edit
+    @strains = Strain.all
+    @oenologists = Oenologist.all
   end
 
   # POST /wines or /wines.json
@@ -59,6 +62,12 @@ class WinesController < ApplicationController
   end
 
   private
+    def user_can_edit
+      if !current_user.can_edit?
+        redirect_to root_path, notice: "You cant access there!"
+      end
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_wine
       @wine = Wine.find(params[:id])
@@ -67,8 +76,14 @@ class WinesController < ApplicationController
     def set_strains
       @strains = Strain.pluck :name, :id
     end
+    
+    def set_oenologists
+      @oenologists = Oenologist.pluck(:name, :id)
+    end
+    
+    
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, assemblies_attributes: [:id, :portion, :strain_id])
+      params.require(:wine).permit(:name, assemblies_attributes: [:id, :portion, :strain_id], grades_attributes: [:id, :oenologist_id, :grade])
     end
 end

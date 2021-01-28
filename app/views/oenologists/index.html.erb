@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Enólogos</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Nacionalidad</th>
+      <th>Revista</th>
+      <th>Cargos</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @oenologists.each do |oenologist| %>
+      <tr>
+        <td><%= oenologist.name %></td>
+        <td><%= oenologist.age %></td>
+        <td><%= oenologist.nacionality %></td>
+        <td><%= oenologist.magazine %></td>
+        <td><%= oenologist.roles %></td>
+        <td><%= link_to 'Detalles', oenologist %></td>
+        <td><%= link_to 'Editar', edit_oenologist_path(oenologist) %></td>
+        <td><%= link_to 'Destruir', oenologist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p class="fs-6 fw-lighter">Disclaimer: La opción Destruir solo implica remover al Enólogo de la base de datos, bajo ninguna circunstancia implica un riesgo a la integridad física del enólogo ni de su familia, a pesar de contar con con una excesiva cantidad de información del sujeto...</p>
+
+<br>
+
+<%= link_to 'Registrar Enólogo', new_oenologist_path %>

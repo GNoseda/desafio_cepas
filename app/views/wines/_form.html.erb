@@ -18,16 +18,39 @@
     </div>
   </div>
   <br>
-  <div class="field" id="assemblies">
-    <%= form.fields_for :assemblies do |ff| %>
-      <%= render 'assembly_fields', :f => ff %>
+  <div class="row">
+    <div class="container col-6">
+      <h3>Ensamblaje</h3>
+      <div class="field" id="assemblies">
+        <%= form.fields_for :assemblies do |ff| %>
+          <%= render 'assembly_fields', :f => ff %>
+        <% end %>
+      </div>
+      <br>
+      <div class="links">
+        <%= link_to_add_association 'Agregar otra cepa', form, :assemblies %>
+      </div>
+      <br>
+    </div>
+    <% if !@oenologists.nil? %>
+      <div class="container col-6">
+        <h3>Calificaciones</h3>
+        <div class="field" id="grades">
+          <%= form.fields_for :grades do |ff| %>
+            <%= render 'grade_fields', :f => ff %>
+          <% end %>
+        </div>
+        <br>
+        <div class="links">
+          <%= link_to_add_association 'Agregar otra calificación', form, :grades %>
+        </div>
+        <br>
+      </div>
+    <% else %>
+      <div class="container col-6"></div>
     <% end %>
   </div>
-  <br>
-  <div class="links">
-    <%= link_to_add_association 'Agregar otra cepa', form, :assemblies %>
-  </div>
-  <br>
+  
   <div class="actions">
     <%= form.submit 'Crear Vino' %>
   </div>

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="field">
     <%= f.label :strain_id, "Seleccine una cepa" %>
-    <%= f.select :strain_id,  options_for_select(@strains)%>
+    <%= f.collection_select( :strain_id,  @strains, :id, :name)%>
   </div>
 
   <div class="field">

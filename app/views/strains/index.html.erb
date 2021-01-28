@@ -1,12 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Strains</h1>
+<h1>Cepas</h1>
 
-<table>
+<table class="table">
   <thead>
+
     <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
+      <th>Nombre</th>
+      <% if current_user.can_edit  %>
+        <th colspan="3"></th>
+      <% else %>  
+        <th colspan="1"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -14,9 +19,11 @@
     <% @strains.each do |strain| %>
       <tr>
         <td><%= strain.name %></td>
-        <td><%= link_to 'Show', strain %></td>
-        <td><%= link_to 'Edit', edit_strain_path(strain) %></td>
-        <td><%= link_to 'Destroy', strain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Detalles', strain %></td>
+        <% if current_user.can_edit %>
+          <td><%= link_to 'Editar', edit_strain_path(strain) %></td>
+          <td><%= link_to 'Destruir', strain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Strain', new_strain_path %>
+<%= link_to 'Agregar Cepa', new_strain_path %>

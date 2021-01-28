@@ -1,29 +1,53 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>Nombre:</strong>
-  <%= @wine.name %>
-</p>
+<div class="row">
+  <div class="col-6">
+    <p>
+      <strong>Nombre:</strong>
+      <%= @wine.name %>
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Cepa</th>
+          <th>Cantidad</th>
+          <th>Participación</th>
+        </tr>
+      </thead>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Cepa</th>
-      <th>Cantidad</th>
-      <th>Participación</th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @wine.assemblies.each do |asmb| %>
+          <tr>
+            <td> <%= asmb.strain_name %> </td>
+            <td> <%= asmb.portion %> </td>
+            <td> <%= asmb.strain_percent %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6">
+    <p>
+      <strong>Calificación:</strong>
+      <%= @wine.avarage_grade %>
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Enólogo</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @wine.assemblies.each do |asmb| %>
-      <tr>
-        <td> <%= asmb.strain_name %> </td>
-        <td> <%= asmb.portion %> </td>
-        <td> <%= asmb.strain_percent %> </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
+      <tbody>
+        <% @wine.grades.each do |grd| %>
+          <tr>
+            <td> <%= grd.oenologist_name %> </td>
+            <td> <%= grd.grade %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <%= link_to 'Editar Vino', edit_wine_path(@wine) %> |
 <%= link_to 'Menú de vinos', wines_path %>

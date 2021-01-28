@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @oenologist.name %>
+</p>
+
+<p>
+  <strong>Edad:</strong>
+  <%= @oenologist.age %>
+</p>
+
+<p>
+  <strong>Nacionalidad:</strong>
+  <%= @oenologist.nacionality %>
+</p>
+
+<p>
+  <strong>Revista:</strong>
+  <%= @oenologist.magazine %>
+</p>
+
+<p>
+  <strong>Roles:</strong>
+  <%= @oenologist.roles %>
+</p>
+
+<%= link_to 'Editar', edit_oenologist_path(@oenologist) %> |
+<%= link_to 'Enólogos', oenologists_path %>

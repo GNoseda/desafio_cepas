@@ -1,5 +1,6 @@
 class StrainsController < ApplicationController
   before_action :set_strain, only: %i[ show edit update destroy ]
+  before_action :user_can_edit, only: %i[ new edit update destroy ]
 
   # GET /strains or /strains.json
   def index
@@ -58,6 +59,13 @@ class StrainsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def user_can_edit
+      if !current_user.can_edit?
+        redirect_to root_path, notice: "You cant access there!"
+      end
+    end
+
+
     def set_strain
       @strain = Strain.find(params[:id])
     end
